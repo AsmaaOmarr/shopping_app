@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/features/authentication/manager/login_notifier.dart';
 import 'package:shopping_app/features/home/screens/bottom_nav_bar.dart';
-import 'package:shopping_app/units/snak_bar.dart';
-import 'package:shopping_app/units/local_storage/shared_prefs.dart';
-import 'package:shopping_app/units/validators/validation.dart';
+import 'package:shopping_app/utils/snak_bar.dart';
+import 'package:shopping_app/utils/local_storage/shared_prefs.dart';
+import 'package:shopping_app/utils/validators/validation.dart';
 import '../signup_view.dart';
 import 'package:shopping_app/common/widgets/custom_button.dart';
 import 'package:shopping_app/common/widgets/custom_pass_textField.dart';
 import 'custom_spacer.dart';
 import 'package:shopping_app/common/widgets/custom_textfield.dart';
-import 'package:shopping_app/units/constants/colors.dart';
+import 'package:shopping_app/utils/constants/colors.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});

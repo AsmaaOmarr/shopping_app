@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app/features/Favorite_stores/screens/fav_view.dart';
 import 'package:shopping_app/features/home/screens/home_view.dart';
-import 'package:shopping_app/units/constants/colors.dart';
+import 'package:shopping_app/utils/constants/colors.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

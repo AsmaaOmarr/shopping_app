@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/features/Favorite_stores/manager/fav_list_provider.dart';
 import 'package:shopping_app/features/home/models/store.dart';
-import 'package:shopping_app/units/constants/colors.dart';
-import 'package:shopping_app/units/snak_bar.dart';
+import 'package:shopping_app/utils/constants/colors.dart';
+import 'package:shopping_app/utils/snak_bar.dart';
 
 class FavoriteStoreListView extends StatelessWidget {
   const FavoriteStoreListView({super.key, required this.stores});

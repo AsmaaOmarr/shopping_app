@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/features/on_boarding/controller/on_boarding_controller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:shopping_app/units/devices/device_utility.dart';
-import 'package:shopping_app/units/constants/sizes.dart';
-import 'package:shopping_app/units/constants/colors.dart';
+import 'package:shopping_app/utils/devices/device_utility.dart';
+import 'package:shopping_app/utils/constants/sizes.dart';
+import 'package:shopping_app/utils/constants/colors.dart';
 
 class OnBoardingNavigationDots extends StatelessWidget {
   const OnBoardingNavigationDots({

@@ -3,12 +3,16 @@ class StoreModel {
   final String name;
   final String address;
   final String imageUrl;
+  final double latitude;
+  final double longitude;
   bool isFavorite;
 
   StoreModel({
     required this.name,
     required this.address,
     required this.imageUrl,
+    required this.latitude,
+    required this.longitude,
     this.isFavorite = false,
   });
 
@@ -17,6 +21,8 @@ class StoreModel {
       name: json['name'],
       address: json['address'],
       imageUrl: json['imageUrl'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
       isFavorite: json['isFavorite'] ?? false,
     );
   }
@@ -26,7 +32,10 @@ class StoreModel {
       'name': name,
       'address': address,
       'imageUrl': imageUrl,
+      'latitude': latitude,
+      'longitude': longitude,
       'isFavorite': isFavorite,
     };
   }
 }
+

@@ -5,8 +5,8 @@ import 'package:shopping_app/features/on_boarding/screens/widgets/onboarding_pag
 import 'package:shopping_app/features/on_boarding/screens/widgets/onboarding_next_button.dart';
 import 'package:shopping_app/features/on_boarding/screens/widgets/onboarding_skip_button.dart';
 import 'package:shopping_app/features/on_boarding/screens/widgets/onboarding_navigation_dots.dart';
-import 'package:shopping_app/units/constants/images.dart';
-import 'package:shopping_app/units/constants/texts.dart';
+import 'package:shopping_app/utils/constants/images.dart';
+import 'package:shopping_app/utils/constants/texts.dart';
 
 
 class OnBoardingScreen extends StatelessWidget {
