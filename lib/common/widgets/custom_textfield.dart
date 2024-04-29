@@ -30,6 +30,7 @@ class CustomTextField extends StatelessWidget {
         vertical: 4,
       ),
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: controller,
         keyboardType: keyboardType,
         cursorColor: AppColors.secondary,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shopping_app/features/authentication/screens/login/login_view.dart';
+import 'package:shopping_app/features/authentication/screens/login_view.dart';
 
 class OnBoardingController extends GetxController {
   static OnBoardingController get instance => Get.find();

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shopping_app/features/authentication/controllers/on_boarding_controller.dart';
-import 'package:shopping_app/features/authentication/screens/onboarding/widgets/onboarding_page.dart';
-import 'package:shopping_app/features/authentication/screens/onboarding/widgets/onboarding_next_button.dart';
-import 'package:shopping_app/features/authentication/screens/onboarding/widgets/onboarding_skip_button.dart';
-import 'package:shopping_app/features/authentication/screens/onboarding/widgets/onboarding_navigation_dots.dart';
+import 'package:shopping_app/features/on_boarding/controller/on_boarding_controller.dart';
+import 'package:shopping_app/features/on_boarding/screens/widgets/onboarding_page.dart';
+import 'package:shopping_app/features/on_boarding/screens/widgets/onboarding_next_button.dart';
+import 'package:shopping_app/features/on_boarding/screens/widgets/onboarding_skip_button.dart';
+import 'package:shopping_app/features/on_boarding/screens/widgets/onboarding_navigation_dots.dart';
 import 'package:shopping_app/units/constants/images.dart';
 import 'package:shopping_app/units/constants/texts.dart';
 
@@ -42,10 +42,8 @@ class OnBoardingScreen extends StatelessWidget {
         ),
         // skip button
         const OnBoardingSkipButton(),
-
         //navigation smoothPageIndicator
         const OnBoardingNavigationDots(),
-
         //main button
         const OnBoardingNextButton()
       ],

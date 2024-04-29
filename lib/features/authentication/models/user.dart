@@ -4,25 +4,19 @@ import 'dart:typed_data';
 class User {
   Uint8List? image;
   String name;
-  String? gender;
   String email;
-  String studentId;
-  String? level;
   String password;
 
   User({
     this.image,
     required this.name,
-    this.gender,
     required this.email,
-    required this.studentId,
-    this.level,
     required this.password,
   });
 
   @override
   String toString() {
-    return 'User{image:$image,name: $name, gender: $gender, email: $email, studentId: $studentId, level: $level, password: $password}';
+    return 'User{image:$image,name: $name, email: $email, password: $password}';
   }
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -39,10 +33,7 @@ class User {
     return User(
       image: imageBytes,
       name: json['name'],
-      gender: json['gender'],
       email: json['email'],
-      studentId: json['studentId'],
-      level: json['level'],
       password: json['password'],
     );
   }
@@ -51,10 +42,7 @@ class User {
     return {
       "image": image,
       'name': name,
-      'gender': gender,
       'email': email,
-      'studentId': studentId,
-      'level': level,
       'password': password,
     };
   }

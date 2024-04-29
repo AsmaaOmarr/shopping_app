@@ -32,6 +32,7 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
         vertical: 4,
       ),
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: widget.controller,
         cursorColor: AppColors.secondary,
         onChanged: widget.onChanged,
