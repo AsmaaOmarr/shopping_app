@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/features/home/manager/store_list_provider.dart';
-import 'package:shopping_app/features/home/models/stores_db.dart';
 import 'package:shopping_app/utils/constants/colors.dart';
-import 'package:shopping_app/utils/local_storage/shared_prefs.dart';
 import 'package:shopping_app/utils/snak_bar.dart';
 import '../../models/store.dart';
 

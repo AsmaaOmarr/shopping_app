@@ -10,7 +10,7 @@ import 'package:shopping_app/utils/local_storage/shared_prefs.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   List<StoreModel>? storedStores = await SharedPreferencesService.getAllStores();
-  if (storedStores == null || storedStores.isEmpty) {
+  if (storedStores.isEmpty) {
     await SharedPreferencesService.saveStores(StoresDB.stores);
   }
   runApp(const MyApp());
