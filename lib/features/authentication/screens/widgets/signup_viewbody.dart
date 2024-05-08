@@ -118,8 +118,6 @@ class SignUpViewBody extends StatelessWidget {
                         );
                         print(user);
                         await DatabaseService.addUser(user);
-                        List<User> users = await DatabaseService.getAllUsers();
-                        print(users);
                         SnakBar.showSnakBar(
                           context,
                           "Sing up success",
@@ -129,7 +127,9 @@ class SignUpViewBody extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const BottomNavBar(),
+                            builder: (context) => BottomNavBar(
+                              userEmail: signUpData.email!,
+                            ),
                           ),
                         );
                         // Navigator.pushReplacement(

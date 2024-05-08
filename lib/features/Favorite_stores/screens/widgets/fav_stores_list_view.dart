@@ -57,23 +57,15 @@ class FavoriteStoreListView extends StatelessWidget {
                   trailing: Consumer<FavoriteStoreListProvider>(
                     builder: (context, favoriteStoreListProvider, _) =>
                         IconButton(
-                      icon: Icon(
-                        stores[index].isFavorite
-                            ? CupertinoIcons.heart_fill
-                            : CupertinoIcons.heart,
-                        color: stores[index].isFavorite ? Colors.red : null,
+                      icon: const Icon(
+                        CupertinoIcons.heart_fill,
+                        color: Colors.red,
                       ),
                       onPressed: () async {
                         String message = '';
-                        if (stores[index].isFavorite) {
-                          await favoriteStoreListProvider
-                              .removeFromFavorites(stores[index]);
-                          message = "Store removed from favorites";
-                        } else {
-                          await favoriteStoreListProvider
-                              .addToFavorites(stores[index]);
-                          message = "Store added to favorites";
-                        }
+                        await favoriteStoreListProvider
+                            .removeFromFavorites(stores[index]);
+                        message = "Store removed from favorites";
                         SnakBar.showSnakBar(context, message, Colors.green,
                             CupertinoIcons.check_mark);
                       },

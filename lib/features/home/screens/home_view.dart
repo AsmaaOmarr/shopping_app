@@ -7,7 +7,8 @@ import 'package:shopping_app/utils/constants/colors.dart';
 import 'widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  final String userEmail;
+  const HomeView({super.key, required this.userEmail});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class HomeView extends StatelessWidget {
         ),
       ),
       body: ChangeNotifierProvider(
-          create: (context) => StoreListProvider(),
+          create: (context) => StoreListProvider(userEmail: userEmail),
           child: const HomeViewBody()),
     );
   }

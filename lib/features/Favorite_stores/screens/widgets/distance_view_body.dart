@@ -34,18 +34,11 @@ class DistanceViewBody extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
                     right: 12,
                     top: 12,
-                    child: Icon(
-                      store.isFavorite
-                          ? CupertinoIcons.heart_fill
-                          : CupertinoIcons.heart,
-                      size: 36,
-                      color: store.isFavorite
-                          ? Colors.red
-                          : Colors.grey.shade800.withOpacity(0.6),
-                    ),
+                    child: Icon(CupertinoIcons.heart_fill,
+                        size: 36, color: Colors.red),
                   )
                 ],
               ),

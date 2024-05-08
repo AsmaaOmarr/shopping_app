@@ -19,6 +19,9 @@ class StoreListView extends StatelessWidget {
         shrinkWrap: true,
         itemCount: stores.length,
         itemBuilder: (context, index) {
+          final storeListProvider = context.watch<StoreListProvider>();
+          bool isFav =
+              storeListProvider.favoriteStoreIds.contains(stores[index].id);
           return Card(
             margin: const EdgeInsets.all(8.0),
             child: Container(
@@ -44,28 +47,24 @@ class StoreListView extends StatelessWidget {
                   stores[index].address,
                   style: const TextStyle(fontFamily: AppColors.kFontFamily),
                 ),
-                trailing: Consumer<StoreListProvider>(
-                  builder: (context, storeListProvider, _) => IconButton(
-                    icon: Icon(
-                      stores[index].isFavorite
-                          ? CupertinoIcons.heart_fill
-                          : CupertinoIcons.heart,
-                      color: stores[index].isFavorite ? Colors.red : null,
-                    ),
-                    onPressed: () async {
-                      String message = '';
-                      if (stores[index].isFavorite) {
-                        await storeListProvider
-                            .removeFromFavorites(stores[index]);
-                        message = "Store removed from favorites";
-                      } else {
-                        await storeListProvider.addToFavorites(stores[index]);
-                        message = "Store added to favorites";
-                      }
-                      SnakBar.showSnakBar(context, message, Colors.green,
-                          CupertinoIcons.check_mark);
-                    },
+                trailing: IconButton(
+                  icon: Icon(
+                    isFav ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
+                    color: isFav ? Colors.red : null,
                   ),
+                  onPressed: () async {
+                    String message = '';
+                    if (isFav) {
+                      await storeListProvider
+                          .removeFromFavorites(stores[index]);
+                      message = "Store removed from favorites";
+                    } else {
+                      await storeListProvider.addToFavorites(stores[index]);
+                      message = "Store added to favorites";
+                    }
+                    SnakBar.showSnakBar(context, message, Colors.green,
+                        CupertinoIcons.check_mark);
+                  },
                 ),
               ),
             ),

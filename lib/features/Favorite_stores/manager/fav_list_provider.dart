@@ -5,22 +5,19 @@ import 'package:shopping_app/utils/local_storage/sq_lite.dart';
 class FavoriteStoreListProvider extends ChangeNotifier {
   List<StoreModel> _stores = [];
 
+  FavoriteStoreListProvider({required this.userEmail});
+
   List<StoreModel> get stores => _stores;
 
-  void getAllFavoriteStores() async {
-    _stores = await DatabaseService.getFavoriteStores();
-    notifyListeners();
-  }
+  final String userEmail;
 
-  Future<void> addToFavorites(StoreModel store) async {
-    await DatabaseService.addToFavorites(store);
-    store.isFavorite = true;
+  void getAllFavoriteStores() async {
+    _stores = await DatabaseService.getFavoriteStores(userEmail);
     notifyListeners();
   }
 
   Future<void> removeFromFavorites(StoreModel store) async {
-    await DatabaseService.removeFromFavorites(store);
-    store.isFavorite = false;
+    await DatabaseService.removeFromFavoriteStores(userEmail, store.id);
     notifyListeners();
   }
 }

@@ -6,7 +6,8 @@ import 'package:shopping_app/features/Favorite_stores/screens/widgets/fav_view_b
 import 'package:shopping_app/utils/constants/colors.dart';
 
 class FavoriteView extends StatelessWidget {
-  const FavoriteView({super.key});
+  final String userEmail;
+  const FavoriteView({super.key, required this.userEmail});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class FavoriteView extends StatelessWidget {
         ),
       ),
       body: ChangeNotifierProvider(
-        create: (context) => FavoriteStoreListProvider(),
+        create: (context) => FavoriteStoreListProvider(userEmail: userEmail),
         child: const FavoriteViewBody(),
       ),
     );

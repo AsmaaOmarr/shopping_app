@@ -8,11 +8,13 @@ class DatabaseService {
   static const String _dbName = 'shopping_app.db';
   static const String _userTable = 'users';
   static const String _storeTable = 'stores';
+  static const String _favStoresTable = 'fav_stores'; // New table
 
   static Future<Database> _getDb() async {
     final directory = await getApplicationDocumentsDirectory();
     final path = join(directory.path, _dbName);
-    return openDatabase(path, version: 1, onCreate: _onCreate);
+    return openDatabase(path,
+        version: 2, onCreate: _onCreate); // Version updated
   }
 
   static Future<void> _onCreate(Database db, int version) async {
@@ -35,8 +37,18 @@ class DatabaseService {
         address TEXT,
         imageUrl TEXT,
         latitude REAL,
-        longitude REAL,
-        isFavorite INTEGER
+        longitude REAL
+      )
+    ''');
+
+    // Create user favorite stores table
+    await db.execute('''
+      CREATE TABLE $_favStoresTable(
+        id INTEGER PRIMARY KEY,
+        user_email TEXT,
+        store_id INTEGER,
+        FOREIGN KEY (user_email) REFERENCES $_userTable(email) ON DELETE CASCADE,
+        FOREIGN KEY (store_id) REFERENCES $_storeTable(id) ON DELETE CASCADE
       )
     ''');
   }
@@ -44,28 +56,6 @@ class DatabaseService {
   static Future<void> addUser(User user) async {
     final db = await _getDb();
     await db.insert(_userTable, user.toJson());
-  }
-
-  static Future<void> removeUser(String email) async {
-    final db = await _getDb();
-    await db.delete(
-      _userTable,
-      where: 'email = ?',
-      whereArgs: [email],
-    );
-  }
-
-  static Future<List<User>> getAllUsers() async {
-    final db = await _getDb();
-    final List<Map<String, dynamic>> maps = await db.query(_userTable);
-    return List.generate(maps.length, (i) {
-      return User(
-        image: maps[i]['image'],
-        name: maps[i]['name'],
-        email: maps[i]['email'],
-        password: maps[i]['password'],
-      );
-    });
   }
 
   static Future<bool> doesEmailExist(String email) async {
@@ -84,7 +74,6 @@ class DatabaseService {
     final db = await _getDb();
     final List<Map<String, dynamic>> maps = await db.query(
       _userTable,
-      columns: ['email'],
       where: 'email = ? AND password = ?',
       whereArgs: [email, password],
     );
@@ -93,17 +82,9 @@ class DatabaseService {
 
   static Future<void> saveStores(List<StoreModel> stores) async {
     final db = await _getDb();
-    // First, clear the existing data
-    //await db.delete(_storeTable);
-
     for (var store in stores) {
       await db.insert(_storeTable, store.toJson());
     }
-  }
-
-  static Future<void> removeAllStores() async {
-    final db = await _getDb();
-    await db.delete(_storeTable);
   }
 
   static Future<List<StoreModel>> getAllStores() async {
@@ -111,51 +92,61 @@ class DatabaseService {
     final List<Map<String, dynamic>> maps = await db.query(_storeTable);
     return List.generate(maps.length, (i) {
       return StoreModel(
+        id: maps[i]['id'],
         name: maps[i]['name'],
         address: maps[i]['address'],
         imageUrl: maps[i]['imageUrl'],
         latitude: maps[i]['latitude'],
         longitude: maps[i]['longitude'],
-        isFavorite: maps[i]['isFavorite'] == 1,
       );
     });
   }
 
-  static Future<void> addToFavorites(StoreModel store) async {
+  static Future<void> addToFavoriteStores(String userEmail, int storeId) async {
     final db = await _getDb();
-    await db.update(
-      _storeTable,
-      {'isFavorite': 1},
-      where: 'name = ?',
-      whereArgs: [store.name],
+    await db.insert(
+        _favStoresTable, {'user_email': userEmail, 'store_id': storeId});
+  }
+
+  static Future<void> removeFromFavoriteStores(
+      String userEmail, int storeId) async {
+    final db = await _getDb();
+    await db.delete(
+      _favStoresTable,
+      where: 'user_email = ? AND store_id = ?',
+      whereArgs: [userEmail, storeId],
     );
   }
 
-  static Future<void> removeFromFavorites(StoreModel store) async {
-    final db = await _getDb();
-    await db.update(
-      _storeTable,
-      {'isFavorite': 0},
-      where: 'name = ?',
-      whereArgs: [store.name],
-    );
-  }
-
-  static Future<List<StoreModel>> getFavoriteStores() async {
+  static Future<List<int>> getUserFavStoreIds(String userEmail) async {
     final db = await _getDb();
     final List<Map<String, dynamic>> maps = await db.query(
-      _storeTable,
-      where: 'isFavorite = ?',
-      whereArgs: [1],
+      _favStoresTable,
+      columns: ['store_id'],
+      where: 'user_email = ?',
+      whereArgs: [userEmail],
     );
     return List.generate(maps.length, (i) {
+      return maps[i]['store_id'] as int;
+    });
+  }
+
+  static Future<List<StoreModel>> getFavoriteStores(String userEmail) async {
+    final db = await _getDb();
+    final List<Map<String, dynamic>> maps = await db.rawQuery('''
+    SELECT $_storeTable.*
+    FROM $_storeTable
+    JOIN $_favStoresTable ON $_storeTable.id = $_favStoresTable.store_id
+    WHERE $_favStoresTable.user_email = ?
+  ''', [userEmail]);
+    return List.generate(maps.length, (i) {
       return StoreModel(
+        id: maps[i]['id'],
         name: maps[i]['name'],
         address: maps[i]['address'],
         imageUrl: maps[i]['imageUrl'],
         latitude: maps[i]['latitude'],
         longitude: maps[i]['longitude'],
-        isFavorite: maps[i]['isFavorite'] == 1,
       );
     });
   }
