@@ -7,8 +7,8 @@ import 'package:shopping_app/common/widgets/custom_button.dart';
 import 'package:shopping_app/common/widgets/custom_pass_textField.dart';
 import 'package:shopping_app/features/authentication/screens/widgets/custom_spacer.dart';
 import 'package:shopping_app/features/home/screens/bottom_nav_bar.dart';
-import 'package:shopping_app/utils/snak_bar.dart';
-import 'package:shopping_app/utils/local_storage/shared_prefs.dart';
+import 'package:shopping_app/utils/local_storage/sq_lite.dart';
+import 'package:shopping_app/utils/snack_bar.dart';
 import 'package:shopping_app/utils/validators/validation.dart';
 import 'package:shopping_app/utils/constants/colors.dart';
 import 'package:shopping_app/common/widgets/custom_textfield.dart';
@@ -29,8 +29,11 @@ class SignUpViewBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 10),
-                  Image.asset("assets/images/auth/Tech Life Remote Life.png"),
-                  const SizedBox(height: 10),
+                  Image.asset(
+                    "assets/images/auth/Tech Life Remote Life.png",
+                    width: 240,
+                  ),
+                  const SizedBox(height: 20),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -100,7 +103,7 @@ class SignUpViewBody extends StatelessWidget {
                     onPressed: () async {
                       bool isExist = false;
                       if (signUpData.email != null) {
-                        isExist = await SharedPreferencesService.doesEmailExist(
+                        isExist = await DatabaseService.doesEmailExist(
                             signUpData.email!);
                         print("Email is exist = $isExist");
                         signUpData.setShowEmailExist(isExist);
@@ -114,9 +117,8 @@ class SignUpViewBody extends StatelessWidget {
                           password: signUpData.password!,
                         );
                         print(user);
-                        await SharedPreferencesService.addUser(user);
-                        List<User> users =
-                            await SharedPreferencesService.getAllUsers();
+                        await DatabaseService.addUser(user);
+                        List<User> users = await DatabaseService.getAllUsers();
                         print(users);
                         SnakBar.showSnakBar(
                           context,

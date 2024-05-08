@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/features/authentication/manager/login_notifier.dart';
 import 'package:shopping_app/features/home/screens/bottom_nav_bar.dart';
-import 'package:shopping_app/utils/snak_bar.dart';
-import 'package:shopping_app/utils/local_storage/shared_prefs.dart';
+import 'package:shopping_app/utils/local_storage/sq_lite.dart';
+import 'package:shopping_app/utils/snack_bar.dart';
 import 'package:shopping_app/utils/validators/validation.dart';
 import '../signup_view.dart';
 import 'package:shopping_app/common/widgets/custom_button.dart';
@@ -28,7 +28,10 @@ class LoginViewBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 70),
-                  Image.asset("assets/images/auth/Tech Life Communication.png"),
+                  Image.asset(
+                    "assets/images/auth/Tech Life Communication.png",
+                    width: 240,
+                  ),
                   const SizedBox(height: 20),
                   const Align(
                     alignment: Alignment.centerLeft,
@@ -86,9 +89,8 @@ class LoginViewBody extends StatelessWidget {
                     buttonName: "Login",
                     onPressed: () async {
                       if (loginData.email != null) {
-                        bool isExist =
-                            await SharedPreferencesService.doesEmailExist(
-                                loginData.email!);
+                        bool isExist = await DatabaseService.doesEmailExist(
+                            loginData.email!);
                         print("Email is exist = $isExist");
                         loginData.setShowEmailNotExist(!isExist);
                       }
@@ -97,9 +99,8 @@ class LoginViewBody extends StatelessWidget {
                         print(loginData.email);
                         print(loginData.password);
                         bool isEmailAndPasswordMatch =
-                            await SharedPreferencesService
-                                .doEmailAndPasswordMatch(
-                                    loginData.email!, loginData.password!);
+                            await DatabaseService.doEmailAndPasswordMatch(
+                                loginData.email!, loginData.password!);
                         print(isEmailAndPasswordMatch);
                         if (isEmailAndPasswordMatch) {
                           SnakBar.showSnakBar(

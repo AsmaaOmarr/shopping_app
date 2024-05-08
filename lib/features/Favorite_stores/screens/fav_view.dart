@@ -16,6 +16,10 @@ class FavoriteView extends StatelessWidget {
           'Favorite Stores',
           style: TextStyle(fontFamily: AppColors.kFontFamily),
         ),
+        leading: const Icon(
+          CupertinoIcons.heart,
+          color: AppColors.primary,
+        ),
       ),
       body: ChangeNotifierProvider(
         create: (context) => FavoriteStoreListProvider(),

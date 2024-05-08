@@ -18,7 +18,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _screens = [
     const HomeView(),
     const FavoriteView(),
-    const Center(child: Text("Location")),
+    const Center(
+        child: Text(
+      "Profile",
+      style: TextStyle(fontSize: 20, fontFamily: AppColors.kFontFamily),
+    )),
+    const Center(
+        child: Text(
+      "Settings",
+      style: TextStyle(fontSize: 20, fontFamily: AppColors.kFontFamily),
+    )),
   ];
 
   @override
@@ -75,11 +84,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
             BottomNavyBarItem(
               icon: const Icon(
-                CupertinoIcons.location,
+                CupertinoIcons.person_fill,
                 size: 26,
               ),
               title: const Text(
-                " Location",
+                " Profile",
+                style: textStyle,
+              ),
+              activeColor: AppColors.white,
+            ),
+            BottomNavyBarItem(
+              icon: const Icon(
+                CupertinoIcons.settings,
+                size: 26,
+              ),
+              title: const Text(
+                " Settings",
                 style: textStyle,
               ),
               activeColor: AppColors.white,

@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:shopping_app/utils/constants/colors.dart';
+
 class CustomSpacer extends StatelessWidget {
   const CustomSpacer({
     super.key,
@@ -12,7 +12,7 @@ class CustomSpacer extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: 155,
+          width: 140,
           height: 0.2,
           color: Colors.black,
         ),
@@ -26,7 +26,7 @@ class CustomSpacer extends StatelessWidget {
           ),
         ),
         Container(
-          width: 155,
+          width: 140,
           height: 0.2,
           color: Colors.black,
         )

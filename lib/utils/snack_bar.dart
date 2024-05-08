@@ -8,7 +8,7 @@ class SnakBar {
       SnackBar(
         content: Container(
           height: 60,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             color: color,
@@ -39,6 +39,4 @@ class SnakBar {
       ),
     );
   }
-
-  
 }

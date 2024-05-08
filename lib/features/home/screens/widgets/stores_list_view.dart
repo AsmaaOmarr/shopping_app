@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/features/home/manager/store_list_provider.dart';
 import 'package:shopping_app/utils/constants/colors.dart';
-import 'package:shopping_app/utils/snak_bar.dart';
+import 'package:shopping_app/utils/snack_bar.dart';
 import '../../models/store.dart';
 
 class StoreListView extends StatelessWidget {
@@ -32,7 +32,7 @@ class StoreListView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage(stores[index].imageUrl),
+                      image: AssetImage(stores[index].imageUrl),
                     ),
                   ),
                 ),
@@ -53,7 +53,6 @@ class StoreListView extends StatelessWidget {
                       color: stores[index].isFavorite ? Colors.red : null,
                     ),
                     onPressed: () async {
-                    
                       String message = '';
                       if (stores[index].isFavorite) {
                         await storeListProvider

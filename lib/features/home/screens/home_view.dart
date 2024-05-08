@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/features/home/manager/store_list_provider.dart';
@@ -7,14 +8,18 @@ import 'widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Home',
+          'Stores',
           style: TextStyle(fontFamily: AppColors.kFontFamily),
+        ),
+        leading: const Icon(
+          CupertinoIcons.bag,
+          color: AppColors.primary,
         ),
       ),
       body: ChangeNotifierProvider(
